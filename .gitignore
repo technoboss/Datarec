@@ -1,0 +1,10 @@
+.env
+venv/
+/dbconnect
+/othersApps
+/keys/
+docker-compose.yml
+Dockerfile
+Pipfile
+Pipfile.lock
+

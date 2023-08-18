@@ -1,0 +1,17 @@
+credentials:
+  usernames:
+    dcurtis:
+      email: m.curtisdon@yahoo.co.uk
+      name: Don Curtis
+      password: $2b$12$hGryrmXXjllifJJQtL.kh.nRlvm8Mv9Pq/T7jzgMqZBfxPCHxfVTG # To be replaced with hashed password
+    djepepi:
+      email: dmc.partners1@gmail.com
+      name: Djehuty Pepinaf
+      password: $2b$12$dkwM6grqAA83Mf6OETYfwejrOdSkF7NQUHclNSSsKoIkhfgpAkgcS # To be replaced with hashed password
+cookie:
+  expiry_days: 30
+  key: "ringo789" # Must be string
+  name: Ouadjet
+preauthorized:
+  emails:
+  - momokurt_ldn@yahoo.co.uk
