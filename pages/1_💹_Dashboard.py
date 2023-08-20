@@ -66,7 +66,7 @@ with col3:
     st.metric(":orange[€ Average Sales]", value = df3['Avg Sales'].astype(float))
 with col4:
     st.info("Number of Sales", icon = "🪁")
-    st.metric(":orange[Sales Counting]", value = df4['Sales Count'])
+    st.metric(":orange[Up-to-date Sales ]", value = df4['Sales Count'])
 #----------------------------GRAPHS---------------------------------------------
 st.divider()
 st.subheader(":red[**Data**] Vizualisation 📊")
@@ -80,7 +80,7 @@ with left:
        orientation="v",
        text="Sales",
        markers=True,
-       title="<b> Sales trend </b>",
+       title="<b> Bimonthly Sales trend </b>",
        color_discrete_sequence=["#0083b8"]*len(df5),
        template="plotly_white",
     )
@@ -101,7 +101,7 @@ with right:
        orientation="v",
        color = 'Quantity', 
        range_color=(0,35),
-       title="<b> Quantity sold </b>",
+       title="<b> Product sold Bimonthly </b>",
        color_continuous_scale = 'portland',
        #color_discrete_sequence=["#0083B8"]*len(df5), # Bleu #0083B8
        template="plotly_white",

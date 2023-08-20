@@ -155,14 +155,15 @@ elif selected1 == "Update":
     with tab1:
         # Displaying the result and reseting the index
         st.subheader(":violet[**_Update_**] Orders Records 🦄")
-        order_id = st.selectbox("Select Order Id", df_fmt1['Order ID'].tolist())
+        #order_id = st.selectbox("Select Order Id", df_fmt1['Order ID'].tolist())
+        order_id = st.number_input("Type order_id", min_value=1)
         order_custid = st.selectbox("Enter Customer ID", df_fmt1['Customer ID'].unique())
         order_date = st.date_input("Enter Order date")
         # Adding button
         if st.button("Update"):
             # SQL query command
-            sqlcmd = "UPDATE Orders SET order_custid=%s, order_date=%s \
-                     where order_id=%s"
+            sqlcmd = "UPDATE Orders SET order_custid=%d, order_date=%s \
+                     where order_id=%d"
             val = (order_custid, order_date, order_id)
             mycursor.execute(sqlcmd, val)                 # Executing sql command
             dbconnect.commit()                            # Saves the changes in the db
@@ -189,12 +190,13 @@ elif selected1 == "Update":
         order_id = st.selectbox("Choose Order Id", df_fmt2['Order ID'].tolist())
         product_id = st.selectbox("Enter Product ID", df_fmt2['Product ID'].unique())
         item_quantity = st.text_input("Enter Item quantity")
+        #item_saleprice = st.selectbox("Select sale price", df_fmt3['Product price'].tolist())
         item_saleprice = st.text_input("Enter Item sales price")
         # Adding button
         if st.button("Save"):
             # SQL query command
-            sqlcmd = "UPDATE Orderitem SET product_id=%s, item_quantity=%s, item_saleprice=%s \
-                    where order_id=%s"
+            sqlcmd = "UPDATE Orderitem SET product_id=%s, item_quantity=%s, item_saleprice=%f \
+                      WHERE order_id=%s"
             val = (product_id, item_quantity, item_saleprice, order_id)
             mycursor.execute(sqlcmd, val)                 # Executing sql command
             dbconnect.commit()                            # Saves the changes in the db

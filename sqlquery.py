@@ -43,8 +43,31 @@ def product_sales():
               FROM Orderitem O \
               JOIN Orders S ON O.order_id = S.order_id\
               JOIN Product P ON P.product_id = O.product_id\
+              WHERE MONTH(S.order_date) BETWEEN MONTH(now()) - 2 AND MONTH(now())\
               ORDER BY S.order_date;')
     data = c.fetchall()
     return data
+# ---------------------------------------------------------------------------
+# Reports query 
+def sales_report():
+    c.execute('SELECT REPLACE(YEAR(O.order_date),",","") AS Year,\
+               MONTHNAME(O.order_date) AS Month, DAY(O.order_date) AS Day,\
+               SUM(P.item_quantity * P.item_saleprice) AS Sales\
+               FROM Orders O\
+               JOIN Orderitem P ON P.order_id = O.order_id\
+               WHERE MONTH(O.order_date) BETWEEN MONTH(now()) - 3 AND MONTH(now())\
+               GROUP BY REPLACE(YEAR(O.order_date),",",""), MONTHNAME(O.order_date), DAY(O.order_date);')
+    data = c.fetchall()
+    return data
 
-#print(sales_count())
+def monthly_sales_by_product():
+    c.execute('SELECT P.product_name AS "Product Name",\
+              COUNT(O.product_id) AS "Unit Sold",\
+              SUM(O.item_quantity * O.item_saleprice) AS Sales \
+              FROM Orderitem O\
+              JOIN Product P on P.product_id = O.product_id\
+              JOIN Orders S ON S.order_id = O.order_id\
+              WHERE MONTH(S.order_date) = MONTH(now())\
+              GROUP BY O.product_id')
+    data = c.fetchall()
+    return data
