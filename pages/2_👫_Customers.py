@@ -53,7 +53,7 @@ mycursor.execute("SELECT * FROM Customer") # SQL query command
 result = mycursor.fetchall()       # Assigning sql query result to a variable
 df = pd.DataFrame(result)          # Converting sql result to Pandas dataframe
 df_fmt = df.set_axis(['Cust ID','Title','Firstname','Surname','Address 1','Address 2',\
-                    'Town','Postcode','Phone','Mtype','Email'], axis=1) #Formating df axis 1
+                      'Town','Postcode','Phone','Mtype','Email','Join date'], axis=1) #Formating df axis 1
 
 # DEFINING SQL QUERY AND DATAFRAME
 mycursor.execute("SELECT * FROM Membertype") # SQL query command
@@ -82,16 +82,17 @@ if selected1 == "Create":
         cust_town = st.text_input("Town")
         cust_pcode = st.text_input("Postcode")
         cust_phone = st.text_input("Phone number")
-        cust_email = st.text_input("Email")
         cust_mtype = st.selectbox("Select Menbership ID", df_fmt2['Mtype ID'].tolist())
-
+        cust_email = st.text_input("Email")
+        join_date = st.date_input("Enter Join date")
         # Add button
         if st.button("Create"):
             # Assigning sql command to variablea
             sqlcmd = "INSERT INTO Customer (cust_title, cust_fname, cust_sname, cust_address1, \
-                    cust_address2, cust_town, cust_pcode, cust_phone, cust_mtype, cust_email) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                      cust_address2, cust_town, cust_pcode, cust_phone, cust_mtype, cust_email,\
+                      join_date) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             val = (cust_title, cust_fname, cust_sname, cust_address1, cust_address2,\
-                   cust_town, cust_pcode, cust_phone, cust_mtype, cust_email)
+                   cust_town, cust_pcode, cust_phone, cust_mtype, cust_email, join_date)
             mycursor.execute(sqlcmd, val)                 # Executing sql command
             dbconnect.commit()                            # Saves the changes in the db
             st.success("Record created successfully !!!") # Display a success message
@@ -135,7 +136,7 @@ elif selected1 == "Update":
         cust_fname = st.selectbox("Select First Name", df_fmt['Firstname'].tolist())
         cust_sname = st.selectbox("Select Surname", df_fmt['Surname'].tolist())
         cust_address1 = st.text_input("Enter new Address 1")
-        
+        cust_address2 = st.text_input("Enter new Address 2")
     #st.markdown("""---""")
     with middle:
         st.write("")
@@ -144,19 +145,19 @@ elif selected1 == "Update":
             st.markdown("Here, :orange[**ONLY**] provide the new record where it is \
                         appropriate, otherwise enter the original matching record.")
         
-        cust_address2 = st.text_input("Enter new Address 2")
         cust_town = st.text_input("Enter new Town")
         cust_pcode = st.text_input("Enter new Postcode")
         cust_phone = st.text_input("Enter new Phone number")
         cust_mtype = st.selectbox("Select Menbership ID", df_fmt2['Mtype ID'].tolist())
         cust_email = st.text_input("Enter new Email")
+        join_date = st.date_input("Enter Join date")
         if st.button("Update"):
             # SQL query command
             sqlcmd = "UPDATE Customer SET cust_title=%s, cust_fname=%s, cust_sname=%s,\
                     cust_address1=%s, cust_address2=%s, cust_town=%s, cust_pcode=%s,\
-                    cust_phone=%s, cust_mtype=%s, cust_email=%s where cust_id=%s"
+                    cust_phone=%s, cust_mtype=%s, cust_email=%s, join_date=%s where cust_id=%s"
             val = (cust_title, cust_fname, cust_sname, cust_address1, cust_address2, \
-                   cust_town, cust_pcode, cust_phone, cust_mtype, cust_email, cust_id)
+                   cust_town, cust_pcode, cust_phone, cust_mtype, cust_email, join_date, cust_id)
             mycursor.execute(sqlcmd, val)                 # Executing sql command
             dbconnect.commit()                            # Saves the changes in the db
             st.success("Hooray, Record Updated successfully !!!") # Display a success message

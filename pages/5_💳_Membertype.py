@@ -74,8 +74,8 @@ elif selected1 == "Update":
     left, middle, right = st.columns([0.4,0.03,0.4])
     with left:
         mtype_id = st.selectbox("Select a Membership ID", df_fmt['Mtype ID'].tolist())
-        #mtype_name = st.text_input("Enter Membership Name")
-        mtype_name = st.selectbox("Select a Membership", df_fmt['Mtype name'].tolist())
+        mtype_name = st.text_input("Enter Membership Name")
+        #mtype_name = st.selectbox("Select a Membership", df_fmt['Mtype name'].tolist())
     with middle:
         st.write("")
     with right:

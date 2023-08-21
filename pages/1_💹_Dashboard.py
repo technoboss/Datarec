@@ -40,16 +40,50 @@ st.subheader(":red[**Key**] Metrics 🔑")
 # Defining data frames
 client_count =  customer_count()
 df1 = pd.DataFrame(client_count, columns = ["Count"])
-#---------------
+
+delta_cnt1 =  customer_count_delta1()
+df_1d = pd.DataFrame(delta_cnt1, columns = ["Join Date"])
+
+delta_cnt2 =  customer_count_delta2()
+df_2d = pd.DataFrame(delta_cnt2, columns = ["Join Date"])
+
+val1 = df_1d["Join Date"].iloc[0] - df_2d["Join Date"].iloc[0]
+#----------------------
 turnover = total_sales()
 df2 = pd.DataFrame(turnover, columns = ['Total Sales'])
-#---------------
+val2 = df2['Total Sales'].astype(float)
+
+current_mth = total_sales_curr()
+df2_1d = pd.DataFrame(current_mth, columns = ['Current Sales'])
+
+prev_mth = total_sales_prev()
+df2_2d = pd.DataFrame(prev_mth, columns = ['Previous Sales'])
+
+val2_1d = df2_1d['Current Sales'].iloc[0] - df2_2d['Previous Sales'].iloc[0]
+#----------------------------
 avg_sales = agv_sales()
 df3 = pd.DataFrame(avg_sales, columns = ['Avg Sales'])
-#---------------
+val3 = df3['Avg Sales'].astype(float)
+
+curr_avgsales = avg_sales_curr()
+df3_1d = pd.DataFrame(curr_avgsales, columns = ['Current Avg'])
+
+prev_avgsales = avg_sales_prev()
+df3_2d = pd.DataFrame(prev_avgsales, columns = ['Previous Avg'])
+
+val3_1d = df3_1d['Current Avg'].iloc[0] - df3_2d['Previous Avg'].iloc[0]
+#-----------------------------------------------
 count_sales = sales_count()
 df4 = pd.DataFrame(count_sales, columns = ['Sales Count'])
-#----------------
+
+count_sales_curr = curr_sales_count()
+df4_1d = pd.DataFrame(count_sales_curr, columns = ['Current Count'])
+
+count_sales_prev = prev_sales_count()
+df4_2d = pd.DataFrame(count_sales_prev, columns = ['Previous Count'])
+
+val4 = df4_1d['Current Count'].iloc[0] - df4_2d['Previous Count'].iloc[0]
+#------------------------------------------------
 prod_sales = product_sales()
 df5 = pd.DataFrame(prod_sales, columns = ['Date','Product','Quantity','Sales'])
 
@@ -57,16 +91,16 @@ df5 = pd.DataFrame(prod_sales, columns = ['Date','Product','Quantity','Sales'])
 col1, col2, col3, col4 = st.columns(4, gap='large')
 with col1:
     st.info(" Customer Stats", icon = "💁‍♀️")
-    st.metric(":orange[Total Customers]", value = df1["Count"] ) 
+    st.metric(":orange[Total Customers]", value = df1["Count"], delta = f'{val1}') 
 with col2:
     st.info("Sales Turnover", icon = "💲")
-    st.metric(":orange[€ Total Turnover ] ", value = df2['Total Sales'].astype(float))
+    st.metric(":orange[Total Turnover (€)] ", value = val2, delta = f'{val2_1d}')
 with col3:
     st.info("Sales Statistics", icon = "💱")
-    st.metric(":orange[€ Average Sales]", value = df3['Avg Sales'].astype(float))
+    st.metric(":orange[Average Sales (€)]", value = val3, delta = f'{val3_1d}')
 with col4:
     st.info("Number of Sales", icon = "🪁")
-    st.metric(":orange[Up-to-date Sales ]", value = df4['Sales Count'])
+    st.metric(":orange[Sales Counting]", value = df4['Sales Count'], delta = f'{val4}')
 #----------------------------GRAPHS---------------------------------------------
 st.divider()
 st.subheader(":red[**Data**] Vizualisation 📊")

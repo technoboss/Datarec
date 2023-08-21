@@ -27,7 +27,7 @@ mycursor.execute("SELECT * FROM Customer") # SQL query command
 result = mycursor.fetchall()       # Assigning sql query result to a variable
 df = pd.DataFrame(result)          # Converting sql result to Pandas dataframe
 df_fmt = df.set_axis(['Cust ID','Title','Firstname','Surname','Address 1','Address 2',\
-                    'Town','Postcode','Phone','Mtype','Email'], axis=1)
+                    'Town','Postcode','Phone','Mtype','Email','Join date'], axis=1)
 
 # Defining a filter function 
 def search_opt(x,y):
@@ -155,15 +155,15 @@ elif selected1 == "Update":
     with tab1:
         # Displaying the result and reseting the index
         st.subheader(":violet[**_Update_**] Orders Records 🦄")
-        #order_id = st.selectbox("Select Order Id", df_fmt1['Order ID'].tolist())
-        order_id = st.number_input("Type order_id", min_value=1)
+        order_id = st.selectbox("Select Order Id", df_fmt1['Order ID'].tolist())
+        #order_id = st.number_input("Type order_id", min_value=1)
         order_custid = st.selectbox("Enter Customer ID", df_fmt1['Customer ID'].unique())
         order_date = st.date_input("Enter Order date")
         # Adding button
         if st.button("Update"):
             # SQL query command
-            sqlcmd = "UPDATE Orders SET order_custid=%d, order_date=%s \
-                     where order_id=%d"
+            sqlcmd = "UPDATE Orders SET order_custid=%s, order_date=%s \
+                     where order_id=%s"
             val = (order_custid, order_date, order_id)
             mycursor.execute(sqlcmd, val)                 # Executing sql command
             dbconnect.commit()                            # Saves the changes in the db
