@@ -42,7 +42,7 @@ st.markdown("""
 
 # Adding top header image into a container
 with st.container():
-    image2 = Image.open('E:/VS_Code/Webapps/Datarec/ressources/images/Report1.png')
+    image2 = Image.open('ressources/images/Report1.png')
     st.image(image2, width=1280, use_column_width=True)
 
 st.subheader("💪BUSINESS STATS AND :red[**REPORTS**]")
@@ -50,10 +50,10 @@ st.divider()
 
 # Defining data frames
 sales_rep =  sales_report()
-df_sale = pd.DataFrame(sales_rep, columns = ["Year", "Month", "Day of Month", "Total Sales"])
+df_sale = pd.DataFrame(sales_rep, columns = ["Day", "Month", "Year", "Qty Sold", "Total Sales"])
 # -------------------------
 monthly_sales_rep =  monthly_sales_by_product()
-df_sale2 = pd.DataFrame(monthly_sales_rep, columns = ["Product", "Unit Sold", "Sales"])
+df_sale2 = pd.DataFrame(monthly_sales_rep, columns = ["Product", "Qty Sold", "Total Sales"])
 # --------------------------
 
 # Creating tabs
@@ -85,6 +85,6 @@ with tab5:
 st.sidebar.success("Select a page above.")
 st.sidebar.divider()
 # Define Brand Logo image
-image = Image.open('E:/VS_Code/Webapps/Datarec/ressources/images/techno.png')
+image = Image.open('ressources/images/techno.png')
 # Add logo to the bottom right position of the page
 st.sidebar.image(image,  width=250)

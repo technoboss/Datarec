@@ -23,7 +23,7 @@ st.markdown("""
             </style>
             """, unsafe_allow_html=True)
 
-image = Image.open('E:/VS_Code/Webapps/Datarec/ressources/images/project.png')
+image = Image.open('ressources/images/project.png')
 
 col1, col2 = st.columns([8, 2])
 with col1:
@@ -152,7 +152,7 @@ with right:
 st.sidebar.success("Select a page above 👒")
 st.sidebar.divider()
 # Define Brand Logo image
-image = Image.open('E:/VS_Code/Webapps/Datarec/ressources/images/techno.png')
+image = Image.open('ressources/images/techno.png')
 # Add logo to the bottom right position of the page
 st.sidebar.markdown('###')
 st.sidebar.markdown('###')

@@ -149,7 +149,7 @@ elif selected1 == "Delete":
                  after clicking on the Delete button to refresh the query result.")
 
 # Define Brand Logo image
-image = Image.open('E:/VS_Code/Webapps/Datarec/ressources/images/techno.png')
+image = Image.open('ressources/images/techno.png')
 # Add logo to the bottom right position of the page
 st.sidebar.markdown('###')
 st.sidebar.markdown('###')

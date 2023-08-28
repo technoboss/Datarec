@@ -65,7 +65,7 @@ if authentication_status == None:
                     to always push you on top of your business decisions to :violet[**smoothly & successfully**] run it.')
     # Adding top header image into a container
     with st.container():
-        image = Image.open("E:/VS_Code/Webapps/Datarec/ressources/images/bannertech1.png")
+        image = Image.open("ressources/images/bannertech1.png")
         st.image(image, width=1280, use_column_width=True)
 
 if authentication_status:
@@ -90,7 +90,7 @@ if authentication_status:
             ---
             Developed with 💖 by:''') 
     # Define Brand Logo image
-    image = Image.open('E:/VS_Code/Webapps/Datarec/ressources/images/techno.png')
+    image = Image.open('ressources/images/techno.png')
     # Add logo 
     st.sidebar.image(image,  width=250)
 

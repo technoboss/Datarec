@@ -112,9 +112,9 @@ def product_sales():
 # ------------------------------------------------------------------------------
 # Data Reports query 
 def sales_report():
-    c.execute('SELECT REPLACE(YEAR(O.order_date),",","") AS Year,\
-               MONTHNAME(O.order_date) AS Month, DAY(O.order_date) AS Day,\
-               SUM(P.item_quantity * P.item_saleprice) AS Sales\
+    c.execute('SELECT DAY(O.order_date) AS Day, MONTHNAME(O.order_date) AS Month,\
+               REPLACE(YEAR(O.order_date),",","") AS Year, SUM(P.item_quantity) AS "Qty Sold",\
+               SUM(P.item_quantity * P.item_saleprice) AS "Total Sales" \
                FROM Orders O\
                JOIN Orderitem P ON P.order_id = O.order_id\
                WHERE MONTH(O.order_date) BETWEEN MONTH(now()) - 3 AND MONTH(now())\
@@ -124,8 +124,8 @@ def sales_report():
 
 def monthly_sales_by_product():
     c.execute('SELECT P.product_name AS "Product Name",\
-              COUNT(O.product_id) AS "Unit Sold",\
-              SUM(O.item_quantity * O.item_saleprice) AS Sales \
+              ROUND(SUM(O.item_quantity),0) AS "Qty Sold",\
+              SUM(O.item_quantity * O.item_saleprice) AS "Total Sales" \
               FROM Orderitem O\
               JOIN Product P on P.product_id = O.product_id\
               JOIN Orders S ON S.order_id = O.order_id\
